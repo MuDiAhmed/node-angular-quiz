@@ -1,0 +1,17 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  mat-list-item {
+    margin: 20px 0;
+  }
+  mat-form-field {
+    width: 100%;
+  }
+  .submit-wrapper {
+    padding: 10px;
+    text-align: right;
+    button {
+      margin: 0 5px;
+    }
+  }
+}
