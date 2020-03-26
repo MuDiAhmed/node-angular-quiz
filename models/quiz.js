@@ -9,24 +9,35 @@ const schema = new MongooseSchema({
     type: Boolean,
     default: false
   },
-  quiz: [
-    {
-      question: { type: String, required: true },
-      answers: { type: [String], required: true },
-      correct: { type: Number, required: true }
-    }
-  ]
+  quiz: {
+    type: [
+      new MongooseSchema({
+        question: { type: String, required: true },
+        answers: { type: [String], required: true },
+        correct: { type: Number, required: true }
+      })
+    ],
+    required: true
+  }
 });
 
 const joiSchema = Joi.object({
   published: Joi.boolean().default(false),
-  quiz: Joi.array().items(
-    Joi.object({
-      question: Joi.string().required(),
-      answers: Joi.array().items(Joi.string()),
-      correct: Joi.number().required()
-    })
-  )
+  quiz: Joi.array()
+    .items(
+      Joi.object({
+        question: Joi.string().required(),
+        answers: Joi.array()
+          .length(3)
+          .items(Joi.string().required())
+          .required(),
+        correct: Joi.number()
+          .min(0)
+          .max(2)
+          .required()
+      }).required()
+    )
+    .required()
 });
 
 module.exports.joiSchema = joiSchema;
