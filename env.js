@@ -1,5 +1,5 @@
 const config = require("config");
-
+const dbConnection = config.get("DB_CONNECTION");
 const env = {
   port: config.has("ENV_PORT") ? config.get("ENV_PORT") : config.get("PORT"),
   env: config.util.getEnv("NODE_ENV"),
@@ -7,6 +7,7 @@ const env = {
   api_debug: config.get("APP_DEBUG.API"),
   db_debug: config.get("APP_DEBUG.DB"),
   log: config.get("LOG"),
+  dbMongooseConfig: config.get("DB_MONGOOSE_CONFIG"),
   dbConnection: {
     host: config.has("ENV_DB_HOST")
       ? config.get("ENV_DB_HOST")
@@ -17,7 +18,8 @@ const env = {
     name: config.has("ENV_DB_NAME")
       ? config.get("ENV_DB_NAME")
       : dbConnection.NAME
-  }
+  },
+  models: config.get("MODELS")
 };
 
 const getEnv = () => {

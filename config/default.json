@@ -23,5 +23,8 @@
     "HOST": "localhost",
     "PORT": "27017",
     "NAME": "3d_diagnostix"
+  },
+  "MODELS": {
+    "QUIZ": "Quiz"
   }
 }
