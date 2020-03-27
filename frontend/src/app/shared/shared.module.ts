@@ -11,6 +11,9 @@ import { MatCardModule } from "@angular/material/card";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [],
@@ -26,7 +29,10 @@ import { MatIconModule } from "@angular/material/icon";
     MatCardModule,
     MatRadioModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatTabsModule,
+    MatSnackBarModule,
+    MatTooltipModule
   ]
 })
 export class SharedModule {}

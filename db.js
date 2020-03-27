@@ -3,6 +3,7 @@ const env = require("./env").getEnv();
 const debug = require("debug")(env.db_debug);
 const dbURL = `mongodb://${env.dbConnection.host}:${env.dbConnection.port}/${env.dbConnection.name}`;
 const dbConnectionConfig = env.dbMongooseConfig;
+mongoose.plugin(require("./plugins/updatedAt"));
 let dbConnection = mongoose
   .createConnection(dbURL, {
     useNewUrlParser: dbConnectionConfig.NEW_URL_PARSER,

@@ -1,1 +1,38 @@
-<p>quizzes works!</p>
+<div class="button-wrapper">
+  <button mat-raised-button color="accent" routerLink="./add">
+    Add Quiz
+  </button>
+</div>
+<mat-tab-group>
+  <mat-tab label="Published">
+    <mat-list>
+      <div mat-subheader>{{ publishedQuiz().length }} Published Quiz</div>
+      <mat-list-item *ngFor="let quiz of publishedQuiz()">
+        <mat-icon mat-list-icon>question_answer</mat-icon>
+        <div mat-line>Title: {{ quiz.title }}</div>
+        <div mat-line>CreatedAt: {{ quiz.createAt | date }}</div>
+        <div mat-line>UpdatedAt: {{ quiz.updateAt | date }}</div>
+      </mat-list-item>
+    </mat-list>
+  </mat-tab>
+  <mat-tab label="Not Published">
+    <mat-list>
+      <div mat-subheader>
+        {{ notPublishedQuiz().length }} Not Published Quiz
+      </div>
+      <mat-list-item *ngFor="let quiz of notPublishedQuiz()">
+        <mat-icon mat-list-icon>question_answer</mat-icon>
+        <div mat-line>Title: {{ quiz.title }}</div>
+        <div mat-line>CreatedAt: {{ quiz.createAt | date }}</div>
+        <div mat-line>UpdatedAt: {{ quiz.updateAt | date }}</div>
+        <button
+          mat-icon-button
+          (click)="publish(quiz)"
+          matTooltip="Click To Publish"
+        >
+          <mat-icon>publish</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-tab>
+</mat-tab-group>

@@ -1,5 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+import { QuizzesService } from "../quizzes.service";
+import { Router } from "@angular/router";
+import { CdkTextareaAutosize } from "@angular/cdk/text-field";
 
 @Component({
   selector: "app-quizzes-form",
@@ -7,30 +10,20 @@ import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
   styleUrls: ["./quizzes-form.component.scss"]
 })
 export class QuizzesFormComponent implements OnInit {
+  @ViewChild("autosize") autosize: CdkTextareaAutosize;
   quizForm: FormGroup = this.formBuilder.group({
     published: [false],
-    quiz: this.formBuilder.array([
-      this.formBuilder.group({
-        question: ["", [Validators.required]],
-        answers: this.formBuilder.array([
-          ["", [Validators.required]],
-          ["", [Validators.required]],
-          ["", [Validators.required]]
-        ]),
-        correct: ["", [Validators.required]]
-      }),
-      this.formBuilder.group({
-        question: ["", [Validators.required]],
-        answers: this.formBuilder.array([
-          ["", [Validators.required]],
-          ["", [Validators.required]],
-          ["", [Validators.required]]
-        ]),
-        correct: ["", [Validators.required]]
-      })
-    ])
+    title: ["", [Validators.required]],
+    quiz: this.formBuilder.array([])
   });
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private quizService: QuizzesService,
+    private router: Router
+  ) {
+    this.addQuestion();
+    this.addQuestion();
+  }
 
   ngOnInit(): void {}
 
@@ -47,7 +40,8 @@ export class QuizzesFormComponent implements OnInit {
           ["", [Validators.required]],
           ["", [Validators.required]]
         ]),
-        correct: ["", [Validators.required]]
+        correct: ["", [Validators.required]],
+        explanation: ["", [Validators.required]]
       })
     );
   }
@@ -59,6 +53,9 @@ export class QuizzesFormComponent implements OnInit {
 
   submit() {
     console.log(this.quizForm.value);
+    this.quizService.post(this.quizForm.value).subscribe(response => {
+      this.router.navigate(["../"]);
+    });
   }
 
   removeQuestion(questionIndex) {

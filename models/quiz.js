@@ -9,24 +9,36 @@ const schema = new MongooseSchema({
     type: Boolean,
     default: false
   },
+  title: {
+    type: String,
+    required: true
+  },
   quiz: {
     type: [
       new MongooseSchema({
         question: { type: String, required: true },
         answers: { type: [String], required: true },
-        correct: { type: Number, required: true }
+        correct: { type: Number, required: true },
+        explanation: { type: String, required: true }
       })
     ],
     required: true
-  }
+  },
+  createAt: { type: Date, default: Date.now },
+  updateAt: { type: Date, default: Date.now }
 });
 
 const joiSchema = Joi.object({
   published: Joi.boolean().default(false),
+  title: Joi.string().required(),
+  _id: Joi.string(),
+  createAt: Joi.date(),
+  updateAt: Joi.date(),
   quiz: Joi.array()
     .items(
       Joi.object({
         question: Joi.string().required(),
+        _id: Joi.string(),
         answers: Joi.array()
           .length(3)
           .items(Joi.string().required())
@@ -34,7 +46,8 @@ const joiSchema = Joi.object({
         correct: Joi.number()
           .min(0)
           .max(2)
-          .required()
+          .required(),
+        explanation: Joi.string().required()
       }).required()
     )
     .required()
