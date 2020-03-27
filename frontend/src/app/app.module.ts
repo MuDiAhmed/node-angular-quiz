@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HeaderComponent } from "./header/header.component";
 import { QuizzesComponent } from "./quizzes/quizzes.component";
 import { QuizzesFormComponent } from "./quizzes-form/quizzes-form.component";
-import { QuizzesService } from "./quizzes.service";
+import { QuizzesService } from "./services/quizzes.service";
 import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({

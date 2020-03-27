@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
-import { QuizzesService } from "../quizzes.service";
+import { QuizzesService } from "../services/quizzes.service";
 import { Router } from "@angular/router";
 import { CdkTextareaAutosize } from "@angular/cdk/text-field";
 

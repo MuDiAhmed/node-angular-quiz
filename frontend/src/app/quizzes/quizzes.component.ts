@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { QuizzesService } from "../quizzes.service";
+import { QuizzesService } from "../services/quizzes.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
