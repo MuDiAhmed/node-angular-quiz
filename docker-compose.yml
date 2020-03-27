@@ -8,6 +8,7 @@ services:
       - "4300:4300"
     depends_on:
       - mongo
+    image: mudi/node-angular-quiz
   mongo:
     container_name: mongo
     image: mongo
