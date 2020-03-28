@@ -5,7 +5,7 @@ services:
     restart: always
     build: .
     ports:
-      - "4300:4300"
+      - "80:4300"
     depends_on:
       - mongo
     image: mudi/node-angular-quiz
